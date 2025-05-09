@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Speedbuilding — Игра</title>
+  <link rel="stylesheet" href="style/style_game.css">
+  <script src="patterns.js"></script>  <!-- Подключаем файл с паттернами -->
+  <script src="block.js"></script>
+</head>
+<body>
+  <div id="timer">00:00</div>
+  <div id="game-container">
+    <div id="left-panel">
+      <div id="build-area" class="grid"></div>
+    </div>
+    <div id="palette-area">
+
+      <div id="palette"></div>
+      <div id="selected-block" class="selected-block"></div>
+    </div>
+    <div id="right-panel">
+      <div id="target-area" class="grid"></div>
+    </div>
+  </div>
+  <div id="congratulation-popup" class="hidden">
+  <div class="popup-content">
+    <h2>Поздравляем!</h2>
+    <p>Вы завершили все 10 паттернов!</p>
+    <p>Ваше время: <span id="final-time"></span></p>
+    <button id="restart-button">Начать сначала</button>
+  </div>
+</div>
+  <script src="script.js"></script>
+</body>
+</html>

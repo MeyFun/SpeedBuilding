@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Speedbuilding — Главная</title>
+  <link rel="stylesheet" href="style/style_index.css">
+</head>
+<body>
+ 
+  <a href="editor.html" id="editor-top-link">
+     <button>Редактор паттернов</button>
+  </a>
+  <div id="start-screen">
+    <h1 class="main-title">Speedbuilding</h1>
+    <p class="description">Посмотри на постройку и повтори её на поле как можно быстрее, используя блоки и кирку.</p>
+
+    <section class="rules-section">
+      <h2>Как играть</h2>
+      <ol>
+        <li>Посмотри на образец постройки справа.</li>
+        <li>Выбери блок из палитры.</li>
+        <li>Кликни на клетки, чтобы воспроизвести картинку.</li>
+        <li>Используй кирку, чтобы убрать лишние блоки.</li>
+        <li>Продолжай делать это как можно быстрее, чтобы достичь максимального результата.</li>
+      </ol>
+
+      <div class="screenshots">
+        <img src="screens/screen2.png" alt="Процесс постройки" class="screenshot">
+      </div>
+    </section>
+
+    <a href="game.html" class="start-link">
+      <button id="start-button">Начать строить</button>
+    </a>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Проверяем, есть ли флаг завершения игры в localStorage
+    window.onload = function() {
+      const gameTime = localStorage.getItem('gameTime');
+      const gameCompleted = localStorage.getItem('gameCompleted');
+      
+      if (gameCompleted === 'true' && gameTime) {
+        // Показываем alert с сохранённым временем
+        alert(`Поздравляем! Вы завершили игру! Время: ${gameTime} секунд`);
+        
+        // Удаляем флаг завершения игры и время, чтобы уведомление не повторялось
+        localStorage.removeItem('gameTime');
+        localStorage.removeItem('gameCompleted');
+      }
+    };
+  </script>
+
+</body>
+</html>

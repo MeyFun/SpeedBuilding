@@ -1,0 +1,153 @@
+html {
+  font-size: 16px; /* Базовая настройка — удобно для rem */
+}
+
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: url('../blocks/background.jpg') no-repeat center/cover fixed;
+  height: 100vh;
+  overflow: hidden; /* Убираем прокрутку */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#start-screen {
+  max-width: 56.25rem; /* 900px */
+  margin: 2vh auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 1rem;
+}
+
+.main-title {
+  font-size: 3rem;
+  margin-bottom: 1.25rem;
+  color: #333;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+}
+
+.description {
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+  color: #444;
+}
+
+.rules-section {
+  text-align: left;
+  background-color: #fff;
+  padding: 1.25rem;
+  border-radius: 0.75rem;
+  margin-top: 2rem;
+  box-shadow: 0 0.125rem 0.375rem rgba(0,0,0,0.1);
+}
+
+.rules-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.625rem;
+}
+
+.rules-section ol {
+  padding-left: 1.25rem;
+  line-height: 1.6;
+  color: #333;
+}
+
+.screenshots {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.screenshot {
+  width: 80%;
+  max-width: 700px;
+  border-radius: 0.5rem;
+  border: 1px solid #ccc;
+  box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.1);
+}
+
+#start-button, #editor-button {
+  font-size: 1.25rem;
+  padding: 0.875rem 1.75rem;
+  border: none;
+  border-radius: 0.625rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 2rem;
+  width: 90%;
+  max-width: 300px;
+}
+
+#start-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+#start-button:hover {
+  background-color: #43a047;
+}
+
+#editor-button {
+  background-color: #2196F3;
+  color: white;
+}
+
+#editor-button:hover {
+  background-color: #1976D2;
+}
+
+.start-link {
+  display: block;
+  margin: 0 auto;
+}
+
+/* Адаптация для маленьких экранов */
+@media (max-width: 600px) {
+  .main-title {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .rules-section h2 {
+    font-size: 1.25rem;
+  }
+
+  .rules-section {
+    padding: 1rem;
+  }
+
+  #start-button, #editor-button {
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem;
+  }
+}
+
+#editor-top-link {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+}
+
+#editor-top-link button {
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #2196F3;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+#editor-top-link button:hover {
+  background-color: #1976D2;
+}

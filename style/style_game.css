@@ -1,0 +1,176 @@
+body {
+  margin: 0;
+  font-family: sans-serif;
+  background: url('../blocks/background.jpg') no-repeat center/cover fixed;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 1200px; /* Ограничиваем максимальную ширину */
+  height: calc(100vh - 80px); /* Учитываем пространство для таймера */
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(16, 32px); /* Ячейки по 32px */
+  grid-template-rows: repeat(16, 32px); /* То же для строк */
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0;
+  justify-content: center;
+  align-content: center;
+}
+
+.cell {
+  width: 32px;
+  height: 32px;
+  background-color: #eee;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #ccc;
+}
+
+#left-panel, #right-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 25%; /* Панели по 25% ширины */
+  min-width: 250px;
+}
+
+#palette-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 200px;
+}
+
+#palette {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+.palette-cell {
+  flex: 0 0 18%; /* до 5 в ряд */
+  aspect-ratio: 1;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #555;
+  cursor: pointer;
+  min-width: 40px; /* не даем стать меньше */
+  min-height: 40px;
+}
+
+
+
+.block-btn {
+  width: 40px; /* Уменьшаем блоки палитры */
+  height: 40px;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #555;
+  cursor: pointer;
+}
+
+#divider-line {
+  width: 2px;
+  height: 80%;
+  background-color: black;
+  margin: 0 10px;
+}
+
+#timer {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  background: white;
+  border: 2px solid black;
+  padding: 10px 20px;
+  z-index: 100;
+}
+
+.selected-block {
+  width: 64px; /* Увеличиваем блок для отображения выбранного */
+  height: 64px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+  background-size: cover;
+  background-position: center;
+}
+
+.popup-content {
+  text-align: center;
+}
+
+#close-popup {
+  padding: 10px 20px;
+  cursor: pointer;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+#close-popup:hover {
+  background-color: #43a047;
+}
+
+
+#congratulation-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s;
+}
+
+#congratulation-popup.hidden {
+  visibility: hidden;
+  opacity: 0;
+}
+
+#congratulation-popup .popup-content {
+  background-color: #fff;
+  padding: 20px;
+  text-align: center;
+  border-radius: 8px;
+}
+
+#congratulation-popup button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
