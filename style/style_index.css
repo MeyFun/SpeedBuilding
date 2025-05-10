@@ -1,5 +1,5 @@
 html {
-  font-size: 16px; /* Базовая настройка — удобно для rem */
+  font-size: 16px; 
 }
 
 body {
@@ -7,7 +7,7 @@ body {
   font-family: sans-serif;
   background: url('../blocks/background.jpg') no-repeat center/cover fixed;
   height: 100vh;
-  overflow: hidden; /* Убираем прокрутку */
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,15 +56,9 @@ body {
   color: #333;
 }
 
-.screenshots {
-  display: flex;
-  justify-content: center;
-  gap: 1.25rem;
-  margin-top: 1.25rem;
-  flex-wrap: wrap;
-}
-
 .screenshot {
+  display: block;
+  margin: 1.25rem auto 0 auto;
   width: 80%;
   max-width: 700px;
   border-radius: 0.5rem;
@@ -72,7 +66,7 @@ body {
   box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.1);
 }
 
-#start-button, #editor-button {
+#start-button {
   font-size: 1.25rem;
   padding: 0.875rem 1.75rem;
   border: none;
@@ -82,29 +76,12 @@ body {
   margin-top: 2rem;
   width: 90%;
   max-width: 300px;
-}
-
-#start-button {
   background-color: #4CAF50;
   color: white;
 }
 
 #start-button:hover {
   background-color: #43a047;
-}
-
-#editor-button {
-  background-color: #2196F3;
-  color: white;
-}
-
-#editor-button:hover {
-  background-color: #1976D2;
-}
-
-.start-link {
-  display: block;
-  margin: 0 auto;
 }
 
 /* Адаптация для маленьких экранов */

@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <title>Speedbuilding — Главная</title>
   <link rel="stylesheet" href="style/style_index.css">
+  <link rel="icon" href="blocks/logo.png">
 </head>
 <body>
- 
   <a href="editor.html" id="editor-top-link">
      <button>Редактор паттернов</button>
   </a>
@@ -23,31 +23,24 @@
         <li>Используй кирку, чтобы убрать лишние блоки.</li>
         <li>Продолжай делать это как можно быстрее, чтобы достичь максимального результата.</li>
       </ol>
-
-      <div class="screenshots">
         <img src="screens/screen2.png" alt="Процесс постройки" class="screenshot">
-      </div>
     </section>
 
-    <a href="game.html" class="start-link">
+    <a href="game.html">
       <button id="start-button">Начать строить</button>
     </a>
   </div>
-
-  <script src="script.js"></script>
   <script>
-    // Проверяем, есть ли флаг завершения игры в localStorage
     window.onload = function() {
       const gameTime = localStorage.getItem('gameTime');
       const gameCompleted = localStorage.getItem('gameCompleted');
       
       if (gameCompleted === 'true' && gameTime) {
-        // Показываем alert с сохранённым временем
+        setTimeout(() => {
         alert(`Поздравляем! Вы завершили игру! Время: ${gameTime} секунд`);
-        
-        // Удаляем флаг завершения игры и время, чтобы уведомление не повторялось
         localStorage.removeItem('gameTime');
         localStorage.removeItem('gameCompleted');
+        }, 100);
       }
     };
   </script>

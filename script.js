@@ -1,13 +1,12 @@
 const playerGrid = [];
 let currentPattern = [];
 let selectedBlock = null;
-let correctCount = 0;
 let startTime;
 let timer;
 let currentTime;
 let isGameRunning = false;
 let completedPatterns = 0;
-const totalPatterns = 5 ; 
+const totalPatterns = 5; 
 let previousPatternIndex = -1;
 
 function createGrid(containerId, isPlayer = false) {
@@ -19,9 +18,18 @@ function createGrid(containerId, isPlayer = false) {
     for (let col = 0; col < 16; col++) {
       const cell = document.createElement("div");
       cell.className = "cell";
+
+      if (col % 4 === 0 && col !== 0) {
+        cell.style.borderLeft = "2px solid silver";
+      }
+      if (row % 4 === 0 && row !== 0) {
+        cell.style.borderTop = "2px solid silver";
+      }
+
       if (isPlayer) {
         cell.addEventListener("click", () => handleCellClick(row, col));
       }
+
       container.appendChild(cell);
       rowCells.push(cell);
     }
@@ -29,6 +37,7 @@ function createGrid(containerId, isPlayer = false) {
   }
   return grid;
 }
+
 
 function loadNewPattern() {
   let patternIndex;
@@ -42,7 +51,6 @@ function loadNewPattern() {
   const pattern = patternObj.grid;
   currentPattern = pattern;
 
-  // Проверка на неизвестные блоки
   const usedBlockTypes = new Set();
   for (const row of currentPattern) {
     for (const cell of row) {
@@ -55,7 +63,6 @@ function loadNewPattern() {
     }
   }
 
-  // Отображаем шаблон на правой сетке
   for (let row = 0; row < 16; row++) {
     for (let col = 0; col < 16; col++) {
       const cellType = pattern[row][col];
@@ -71,9 +78,9 @@ function loadNewPattern() {
 function updateSelectedBlock(block) {
   const selectedBlockDisplay = document.getElementById('selected-block');
   if (block) {
-    selectedBlockDisplay.style.backgroundImage = `url(${BLOCKS[block]})`; // Показываем выбранный блок
+    selectedBlockDisplay.style.backgroundImage = `url(${BLOCKS[block]})`;
   } else {
-    selectedBlockDisplay.style.backgroundImage = ''; // Если блок не выбран
+    selectedBlockDisplay.style.backgroundImage = '';
   }
 }
 
@@ -103,7 +110,6 @@ function createPalette(blockTypesSet) {
     palette.appendChild(paletteCell);
   });
 
-  // Добавляем кирку (удаление)
   const pickaxeCell = document.createElement("div");
   pickaxeCell.className = "palette-cell";
   pickaxeCell.style.backgroundImage = "url(blocks/pickaxe.png)";
@@ -142,21 +148,17 @@ function handleCellClick(row, col) {
     delete cell.dataset.block;
   }
 
-  // Проверка, совпадает ли сетка
   if (gridsMatch(playerGrid, currentPattern)) {
     console.log("Построено правильно, очищаем поле и показываем поздравление!");
-    showPopup();
-    correctCount++;
-    clearGrid(); // Очищаем поле
+    clearGrid();
 
-    // Увеличиваем счетчик завершенных паттернов и проверяем, завершена ли игра
     completedPatterns++;
     if (completedPatterns >= totalPatterns) {
       stopTimer();
       showCongratulatoryMessage();
     } else {
       setTimeout(() => {
-        loadNewPattern(); // Загружаем новый паттерн
+        loadNewPattern();
       }, 1000);
     }
   }
@@ -173,14 +175,6 @@ function gridsMatch(playerGrid, pattern) {
   return true;
 }
 
-function showPopup() {
-  const popup = document.getElementById("congratulation-popup");
-  const finalTime = document.getElementById("final-time");
-  const timeTaken = Math.floor((Date.now() - startTime) / 1000);
-  finalTime.textContent = `${timeTaken} секунд`;
-  popup.style.display = "flex";
-}
-
 function startTimer() {
   startTime = Date.now();
   isGameRunning = true;
@@ -193,7 +187,6 @@ function updateTimer() {
   const seconds = Math.floor((currentTime / 1000) % 60);
   const minutes = Math.floor((currentTime / 1000 / 60) % 60);
 
-  // Форматируем как двухзначные числа
   const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
   const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
 
@@ -206,36 +199,16 @@ function stopTimer() {
 }
 
 function showCongratulatoryMessage() {
-  const finalTime = Math.floor((Date.now() - startTime) / 1000); // Время, затраченное на игру
-
-  // Сохраняем время в localStorage
-  localStorage.setItem('gameTime', finalTime);
-  localStorage.setItem('gameCompleted', 'true'); // Устанавливаем флаг завершения игры
-
-  // Перенаправляем на главную страницу
+  const finalTime = document.getElementById("timer").textContent;
+  localStorage.setItem("gameCompleted", "true");
+  localStorage.setItem("gameTime", finalTime);
   window.location.href = "index.html";
 }
 
-
-function restartGame() {
-  clearGrid();
-  completedPatterns = 0;
-  correctCount = 0;
-  loadNewPattern();
-  startTimer();
-
-  // Скрыть окно и восстановить фон
-  const popup = document.getElementById('congratulation-popup');
-  popup.style.display = "none"; // Скрыть окно
-  document.body.style.backgroundColor = ""; // Восстановить цвет фона
-}
-
-// Инициализация игры
 const patternGrid = createGrid("target-area", false);
 playerGrid.push(...createGrid("build-area", true));
 
 window.addEventListener("load", () => {
   startTimer();
-  correctCount = 0;
   loadNewPattern();
 });

@@ -1,5 +1,5 @@
 :root {
-  font-size: 1vw; /* базовая единица — 1% ширины экрана */
+  font-size: 1vw;
 }
 
 body {
@@ -10,7 +10,6 @@ body {
   height: 100vh;
 }
 
-/* Кнопка "назад" */
 #back-button {
   position: absolute;
   top: 2vh;
@@ -25,7 +24,6 @@ body {
   z-index: 1000;
 }
 
-/* Главный контейнер */
 #game-container {
   width: 100vw;
   height: 100vh;
@@ -35,7 +33,6 @@ body {
   justify-content: center;
 }
 
-/* Макет редактора */
 #editor-layout {
   display: flex;
   flex-direction: row;
@@ -46,7 +43,6 @@ body {
   gap: 2vw;
 }
 
-/* Левая панель: палитра и выбранный блок */
 #left-panel {
   display: flex;
   flex-direction: column;
@@ -76,7 +72,6 @@ body {
   cursor: pointer;
 }
 
-/* Отображение выбранного блока */
 .selected-block {
   width: 4rem;
   height: 4rem;
@@ -86,7 +81,6 @@ body {
   background-position: center;
 }
 
-/* Сетка (центральная часть) */
 .grid {
   display: grid;
   grid-template-columns: repeat(16, 1fr);
@@ -107,7 +101,6 @@ body {
   border: 0.05rem solid #ccc;
 }
 
-/* Правая панель: ввод имени паттерна и кнопки */
 #right-panel {
   display: flex;
   flex-direction: column;
@@ -135,16 +128,6 @@ body {
   cursor: pointer;
 }
 
-/* Подсветка */
-.correct {
-  outline: 0.3rem solid green;
-}
-
-.wrong {
-  outline: 0.3rem solid red;
-}
-
-/* Адаптация для узких экранов */
 @media (max-width: 768px) {
   :root {
     font-size: 2.5vw;

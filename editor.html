@@ -4,7 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Редактор паттернов</title>
-  <link rel="stylesheet" href="style/style_editor.css" />
+  <link rel="stylesheet" href="style/style_editor.css">
+  <link rel="icon" href="blocks/logo.png">
   <script src="block.js"></script>
 </head>
 <body>
@@ -35,7 +36,7 @@
     let buildGrid = [];
     const GRID_SIZE = 16;
 
-    // Функция для создания сетки
+    //Создание сетки
     function createGrid(container, size = GRID_SIZE) {
       container.innerHTML = "";
       const grid = [];
@@ -61,7 +62,7 @@
       return grid;
     }
 
-    // Функция для генерации палитры блоков
+    //Генерация палитры
     function generatePalette() {
       const palette = document.getElementById("palette");
       palette.innerHTML = "";
@@ -86,7 +87,7 @@
       palette.appendChild(eraser);
     }
 
-    // Получаем текущий паттерн из сетки
+    //Текущий паттерн
     function getCurrentPattern() {
       const grid = document.querySelectorAll("#build-area .cell");
       const pattern = [];
@@ -105,19 +106,16 @@
       return pattern;
     }
 
-    // Сохраняем паттерн в localStorage
+    //Сохранение текущего паттерна
     function savePattern() {
       const name = document.getElementById("pattern-name").value.trim();
       if (!name) return alert("Введите название паттерна.");
       const grid = getCurrentPattern();
       
-      // Получаем существующие паттерны из localStorage или создаем новый массив
       const savedPatterns = JSON.parse(localStorage.getItem("patterns")) || [];
 
-      // Добавляем новый паттерн в массив
       savedPatterns.push({ name, grid });
 
-      // Сохраняем обновлённый массив паттернов обратно в localStorage
       localStorage.setItem("patterns", JSON.stringify(savedPatterns));
 
       alert("Паттерн сохранён!");
@@ -128,7 +126,6 @@
       const savedPatterns = JSON.parse(localStorage.getItem("patterns")) || [];
       const patternsData = `const patterns = ${JSON.stringify(savedPatterns, null, 2)};`;
 
-      // Создание файла для скачивания
       const blob = new Blob([patternsData], { type: "application/javascript" });
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
