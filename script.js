@@ -70,8 +70,7 @@ function loadNewPattern() {
       cell.style.backgroundImage = BLOCKS[cellType] ? `url(${BLOCKS[cellType]})` : "";
     }
   }
-
-  // Создаем палитру
+  
   createPalette(usedBlockTypes);
 }
 
