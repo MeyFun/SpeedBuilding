@@ -13,27 +13,27 @@ function createGrid(containerId, isPlayer = false) {
   const container = document.getElementById(containerId);
   container.innerHTML = "";
   const grid = [];
-  for (let row = 0; row < 16; row++) {
-    const rowCells = [];
-    for (let col = 0; col < 16; col++) {
+  for (let x = 0; x < 16; x++) {
+    const row = [];
+    for (let y = 0; y < 16; y++) {
       const cell = document.createElement("div");
       cell.className = "cell";
 
-      if (col % 4 === 0 && col !== 0) {
+      if (y % 4 === 0 && y !== 0) {
         cell.style.borderLeft = "2px solid silver";
       }
-      if (row % 4 === 0 && row !== 0) {
+      if (x % 4 === 0 && x !== 0) {
         cell.style.borderTop = "2px solid silver";
       }
 
       if (isPlayer) {
-        cell.addEventListener("click", () => handleCellClick(row, col));
+        cell.addEventListener("click", () => handleCellClick(x, y));
       }
 
       container.appendChild(cell);
-      rowCells.push(cell);
+      row.push(cell);
     }
-    grid.push(rowCells);
+    grid.push(row);
   }
   return grid;
 }
@@ -63,14 +63,13 @@ function loadNewPattern() {
     }
   }
 
-  for (let row = 0; row < 16; row++) {
-    for (let col = 0; col < 16; col++) {
-      const cellType = pattern[row][col];
-      const cell = patternGrid[row][col];
+  for (let x = 0; x < 16; x++) {
+    for (let y = 0; y < 16; y++) {
+      const cellType = pattern[x][y];
+      const cell = patternGrid[x][y];
       cell.style.backgroundImage = BLOCKS[cellType] ? `url(${BLOCKS[cellType]})` : "";
     }
   }
-  
   createPalette(usedBlockTypes);
 }
 
@@ -133,8 +132,8 @@ function clearGrid() {
   }
 }
 
-function handleCellClick(row, col) {
-  const cell = playerGrid[row][col];
+function handleCellClick(x, y) {
+  const cell = playerGrid[x][y];
   if (selectedBlock) {
     if (!BLOCKS[selectedBlock]) {
       console.warn(`❗ Попытка использовать несуществующий блок "${selectedBlock}"`);
@@ -158,16 +157,16 @@ function handleCellClick(row, col) {
     } else {
       setTimeout(() => {
         loadNewPattern();
-      }, 1000);
+      }, 500);
     }
   }
 }
 
 function gridsMatch(playerGrid, pattern) {
-  for (let row = 0; row < 16; row++) {
-    for (let col = 0; col < 16; col++) {
-      const playerBlock = playerGrid[row][col].dataset.block || null;
-      const patternBlock = pattern[row][col] || null;
+  for (let x = 0; x < 16; x++) {
+    for (let y = 0; y < 16; y++) {
+      const playerBlock = playerGrid[x][y].dataset.block || null;
+      const patternBlock = pattern[x][y] || null;
       if (playerBlock !== patternBlock) return false;
     }
   }

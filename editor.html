@@ -12,7 +12,7 @@
   <a href="index.html" id="back-button">← На главную</a>
   
   <div id="game-container">
-    <div id="editor-layout">
+    <div id="editor">
       <div id="left-panel">
         <div id="palette"></div>
         <div id="selected-block" class="selected-block"></div>
@@ -22,9 +22,9 @@
 
       <div id="right-panel">
         <input type="text" id="pattern-name" placeholder="Название паттерна" />
-        <button id="save-btn">Сохранить паттерн</button>
-        <button id="download-btn">Скачать паттерны</button>
-        <button id="clear-btn">Очистить паттерны</button> <!-- Кнопка очистки -->
+        <button id="save-button">Сохранить паттерн</button>
+        <button id="download-button">Скачать паттерны</button>
+        <button id="clear-button">Очистить паттерны</button>
       </div>
     </div>
   </div>
@@ -36,7 +36,6 @@
     let buildGrid = [];
     const GRID_SIZE = 16;
 
-    //Создание сетки
     function createGrid(container, size = GRID_SIZE) {
       container.innerHTML = "";
       const grid = [];
@@ -62,7 +61,6 @@
       return grid;
     }
 
-    //Генерация палитры
     function generatePalette() {
       const palette = document.getElementById("palette");
       palette.innerHTML = "";
@@ -82,12 +80,11 @@
       eraser.style.backgroundImage = `url(${PICKAXE})`;
       eraser.addEventListener("click", () => {
         selectedBlock = "eraser";
-        document.getElementById("selected-block").style.backgroundImage = `url(${PICKAXE})`;
+        document.getElementById("selected-block").style.backgroundImage = "";
       });
       palette.appendChild(eraser);
     }
 
-    //Текущий паттерн
     function getCurrentPattern() {
       const grid = document.querySelectorAll("#build-area .cell");
       const pattern = [];
@@ -105,8 +102,7 @@
       }
       return pattern;
     }
-
-    //Сохранение текущего паттерна
+      
     function savePattern() {
       const name = document.getElementById("pattern-name").value.trim();
       if (!name) return alert("Введите название паттерна.");
@@ -121,7 +117,6 @@
       alert("Паттерн сохранён!");
     }
 
-    // Скачать паттерны как JavaScript файл
     function downloadPatterns() {
       const savedPatterns = JSON.parse(localStorage.getItem("patterns")) || [];
       const patternsData = `const patterns = ${JSON.stringify(savedPatterns, null, 2)};`;
@@ -133,19 +128,17 @@
       link.click();
     }
 
-    // Очистить все сохранённые паттерны из localStorage
     function clearPatterns() {
       localStorage.removeItem("patterns");
       alert("Все паттерны очищены!");
     }
 
-    // Инициализация
     window.onload = () => {
       generatePalette();
       buildGrid = createGrid(document.getElementById("build-area"), GRID_SIZE);
       document.getElementById("save-btn").addEventListener("click", savePattern);
       document.getElementById("download-btn").addEventListener("click", downloadPatterns);
-      document.getElementById("clear-btn").addEventListener("click", clearPatterns); // Привязываем очистку
+      document.getElementById("clear-btn").addEventListener("click", clearPatterns); 
     };
   </script>
 </body>
